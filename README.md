@@ -1,4 +1,4 @@
-KIKIPAY
+KIKIPAIE
 ========================
 
 Logiciel de répartition de dépense pour groupe humain. 
