@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 class MainController extends Controller
 {
     /**
-     * @Route("/home", name="home")
+     * @Route("/", name="home")
      */
     public function home()
     {
@@ -98,12 +98,21 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/recap", name="recap")
+     * @Route("/recap{id}", name="recap")
      */
-    public function recap()
+    public function recap($id)
     {
+        $group = $this->getDoctrine()
+            ->getRepository(Group::class)
+            ->find($id);
+        $users = $group->getUsers();
+
+        
+
         return $this->render('main/recap.html.twig', [
             'controller_name' => 'MainController',
+            'group' => $group,
+            'users' => $users
         ]);
     }
 }
