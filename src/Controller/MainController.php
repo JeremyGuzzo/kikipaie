@@ -73,6 +73,23 @@ class MainController extends Controller
     }
 
     /**
+    * @Route("/delete/{id}", name="delete")
+    */
+    public function deleteUser($id, Request $request) {
+        $delete = $this->getDoctrine()->getManager();
+        $user = $delete->getRepository(User::class)->find($id);
+        
+        $currentGroup = $user->getGroupUsed();
+        $currentGroupId= $currentGroup->getId();
+        
+        $delete->remove($user);
+        $delete->flush();
+        
+        
+        return $this->redirectToRoute('admin', array('id' => $currentGroupId));
+    }
+
+    /**
      * @Route("/recap", name="recap")
      */
     public function recap()
