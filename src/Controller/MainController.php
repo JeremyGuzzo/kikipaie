@@ -23,10 +23,12 @@ class MainController extends Controller
         $group = $this->getDoctrine()
             ->getRepository(Group::class)
             ->findAll();
-        
+
         return $this->render('main/home.html.twig', [
             'groups' => $group,
         ]);
+
+
     }
 
     /**
@@ -40,13 +42,13 @@ class MainController extends Controller
         //creer le formulaire d'ajout de participants
         $user = new User();
         $user->setGroupUsed($group);
-        
+
         $form = $this->createFormBuilder($user)
             ->add('name', TextType::class)
             ->add('spending', IntegerType::class)
             ->add('ajouter', SubmitType::class, array('label' => 'Ajouter un participant'))
             ->getForm();
-        
+
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
@@ -70,6 +72,29 @@ class MainController extends Controller
             'total' => $totalAmount,
             'form' => $form->createView()
         ]);
+
+
+
+}
+
+    /**
+     * @Route("/delete/{id}", name="delete")
+     */
+
+    public function deleteGroup($id){
+
+      $delete = $this->getDoctrine()->getManager();
+
+      $group = $delete->getRepository(Group::class)->find($id);
+
+      if (!$group) {
+          return $this->redirectToRoute('home');
+      }
+
+      $delete->remove($group);
+      $delete->flush();
+
+      return $this->redirectToRoute('home');
     }
 
     /**
