@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}KiKiPaie{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>KiKiPaie</h1>
+        <hr />
+        <p>Bienvenue sur KiKiPaie, organisateur de budget pour projets entre amis, collégues, famille...<br>
+        Cliquez sur le bouton "Nouveau Budget" ci-dessous pour commencer un nouveau budget.</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <a>
+            <button class="btn btn-primary">Nouveau Budget</button>
+        </a>
+        <hr />
+        {% if groups %}
+            <p>Vos groupes déja créés :</p>
+            {%for group in groups %}
+            <a href="{{path('admin', { 'id':group.id })}}">
+                <button class="btn btn-primary">{{group.name}}</button>
+            </a>
+            {% endfor %}
+        {% else %}
+            Soyez le premier à utiliser le logiciel !
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

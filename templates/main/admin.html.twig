@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}KiKiPaie{% endblock %}
+
+{% block body %}
+<div class="row d-flex align-items-center">
+    <div class="col-1">
+        <a href="{{path('home')}}" class="btn btn-primary">Retour</a>
+    </div>
+    <div class="col-10">
+        <h1>Budget pour {{ group.name }} </h1>
+    </div>
+    <div class="col-1">
+        <a href="{{path('home')}}" class="btn btn-danger ml-auto">Supprimer le groupe</a>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Participants</th>
+            <th>Participation (en €)</th>
+            <th>Balance</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in group.users %} 
+            <tr>
+                <td>{{ user.name|upper}}</td>
+                <td>
+                    <div class="form-group">
+                        <input type="text" class="form-control" value="{{ user.spending}}" />
+                    </div>
+                </td>
+                {% set balance = (user.spending - (total / group.users|length))|round %}
+                <td class="{% if balance > 0 %} text-success {% else %} text-danger {% endif %}">
+                    {{ balance }}  €
+                </td>
+            </tr>     
+        {% endfor %}
+        {{ form_start(form) }}
+            {{ form_errors(form) }}
+            <tr>
+                <td>
+                    <div class="form-group">
+                        {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder':'Ajout un participant'}}) }}
+                        {{ form_errors(form.name) }}
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        {{ form_widget(form.spending, {'attr': {'class': 'form-control', 'placeholder':'Dépense'}}) }}
+                        {{ form_errors(form.spending) }}
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        {{ form_row(form.ajouter, {'attr': {'class': 'btn btn-primary'}}) }}
+                    </div>
+                </td>
+            </tr>
+        {{ form_end(form) }}
+    </tbody>
+</table>
+<hr/>
+
+
+<hr />
+<div class="row text-center">
+    <div class="col-md-12">
+        <h2>Total: {{total}} €</h2>
+    </div>
+</div>
+<div class="row">  
+    <div class="col-12">
+        <a href="#" class="btn btn-primary">Calculer la répartition</a>
+    </div>
+</div>
+
+{% endblock %}
