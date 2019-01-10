@@ -11,7 +11,7 @@
         <h1>Budget pour {{ group.name }} </h1>
     </div>
     <div class="col-1">
-        <a href="{{path('home')}}" class="btn btn-danger ml-auto">Supprimer le groupe</a>
+        <a href="{{path('delete', { 'id':group.id })}}" class="btn btn-danger ml-auto">Supprimer le groupe</a>
     </div>
 </div>
 <table class="table">
@@ -23,7 +23,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for user in group.users %} 
+        {% for user in group.users %}
             <tr>
                 <td>{{ user.name|upper}}</td>
                 <td>
@@ -35,7 +35,7 @@
                 <td class="{% if balance > 0 %} text-success {% else %} text-danger {% endif %}">
                     {{ balance }}  €
                 </td>
-            </tr>     
+            </tr>
         {% endfor %}
         {{ form_start(form) }}
             {{ form_errors(form) }}
@@ -70,7 +70,7 @@
         <h2>Total: {{total}} €</h2>
     </div>
 </div>
-<div class="row">  
+<div class="row">
     <div class="col-12">
         <a href="#" class="btn btn-primary">Calculer la répartition</a>
     </div>
