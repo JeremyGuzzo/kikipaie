@@ -93,7 +93,6 @@ class MainController extends Controller
 
       $delete->remove($group);
       $delete->flush();
-      
 
       return $this->redirectToRoute('home');
     }
