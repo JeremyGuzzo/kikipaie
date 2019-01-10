@@ -14,21 +14,13 @@ __ROLES :__
 * Agent volant (consultant) : **Oli** et **Jordan**
 * Template en twig (mise en forme avec twig): Marlene et Martin 
 * Algorithme (réalisation de l'algo et page de calcul) : Théo et Nicolas
-
-    Création nouveau budget (form de budget) : Wahid
-
-    Ergonomie maquettage : Marlene et Oli
-
-    Git + GitHub : Marlene
-
-    Logo : Marlène
-
-    Formulaire suppression et modification des participants : Hue et Jeremy
-
-    Formulaire de supression de groupe : Issa, Wahid et Olivier
-
-    Documentation : Saifi et Marion
-
+* Création nouveau budget (form de budget) : Wahid
+* Ergonomie maquettage : Marlene et Oli
+* Git + GitHub : Marlene
+* Logo : Marlène
+* Formulaire suppression et modification des participants : Hue et Jeremy
+* Formulaire de supression de groupe : Issa, Wahid et Olivier
+* Documentation : Saifi et Marion
 
 Projet sur GitHub : https://github.com/JeremyGuzzo/kikipaie.git
 
@@ -119,6 +111,8 @@ Solution : dump de la bdd de jérémy, tout fonctionnne.
 fonctionnalités
 ajouter supprimer des budgets
 connexion 
+
+
 
 
 
