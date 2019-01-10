@@ -69,7 +69,7 @@ mysql.
     php bin/console server:run
 
 8./ Accéder au site web via un navigateur
-http://127.0.0.1:8000/home
+http://127.0.0.1:8000
 GitHubGitHub
 JeremyGuzzo/kikipaie
 Contribute to JeremyGuzzo/kikipaie development by creating an account on GitHub
