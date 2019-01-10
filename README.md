@@ -11,7 +11,7 @@ Réaliser dans le cadre de la formation HumanBooster @ Bel Air Camp (2018/2019)
 
 __ROLES :__ 
 
-* Agent volant (consultant) : **Oli** et **Jordan**
+* Agent volant (consultant) : Oli et Jordan
 * Template en twig (mise en forme avec twig): Marlene et Martin 
 * Algorithme (réalisation de l'algo et page de calcul) : Théo et Nicolas
 * Création nouveau budget (form de budget) : Wahid
@@ -23,25 +23,7 @@ __ROLES :__
 * Documentation : Saifi et Marion
 
 
-Pour récuperer la BDD : Dev Web Villeurbanne !
-
-
-team kikipay:
-                                          
-* AMINI ABDUL WAHID 06.58.74.83.66                                    
-* BELLAL SAIFI   06.11.57.15.37                                   
-* BOMBRUN JORDAN  06 64.16.14.18                     
-* CHARON OLIVIER   07.71.81.66.21                                   
-* DIA ISSA 06.01.79.61.78                                   
-* EGRAZ MARLENE 06.27.83.30.95                                   
-* GARCIA MONCADA HUE THI THANH 07.78.67.05.96
-* GORGETTE  OLIVIER 06.14.37.22.27
-* GUZZO JEREMY    06.62.69.51.59
-* MONNET MARION 06.76.43.47.62
-* TRINQUET  NICOLAS 06.30.60.76.78 
-* WILL-BOISSONNAT MARTIN 06.76.79.39.56
-* ZAHAF THEO 06.86.05.06.85
-                         
+Pour récuperer la BDD : SLACK Dev Web Villeurbanne !
 
 coding rules:
 =================
