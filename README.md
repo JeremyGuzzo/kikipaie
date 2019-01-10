@@ -25,15 +25,16 @@ __ROLES :__
 
 Pour récuperer la BDD : SLACK Dev Web Villeurbanne !
 
-coding rules:
+coding rules
 =================
     
 * le nom des variables en anglais
 * utilisation de symfony
 * pensez à lire la documentation de symfony
-    
-     
-    
+
+Requirements 
+===============
+* Php 7.2
 
 
 Installation Step By Step
