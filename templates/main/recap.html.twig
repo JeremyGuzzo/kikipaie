@@ -11,16 +11,13 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Participants</th>
-            <th>Participation (en €)</th>
-            <th>Doit</th>
+            <th>Opérations à effectuer</th>
         </tr>
     </thead>
     <tbody>
-        {% for user in users %} 
+        {% for result in results %} 
             <tr>
-                <td>{{ user.name|upper}}</td>
-                <td>{{ user.spending}}</td>
+                <td>{{result}}</td>
             </tr>     
         {% endfor %}
     </tbody>

@@ -31,6 +31,37 @@ class MainController extends Controller
 
     }
 
+
+        /**
+     * @Route("/addGroup", name="addGroup")
+     */
+    public function addGroup(Request $request)
+    {
+        //creer le formulaire d'ajout de groupe
+        $group = new Group();
+        $group->setName('');
+
+        $form = $this->createFormBuilder($group)
+            ->add('name', TextType::class)
+            ->add('create', SubmitType::class, array('label' => 'Crée'))
+            ->getForm();
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $group = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($group);
+            $entityManager->flush();
+            $id = $group->getId();
+            return $this->redirectToRoute('admin', array('id' => $id) );
+        }
+
+        
+        return $this->render('main/addGroup.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
     /**
      * @Route("/admin/{id}", name="admin")
      */
@@ -124,11 +155,62 @@ class MainController extends Controller
             ->find($id);
         $users = $group->getUsers();
 
+    
+
+        $positif = array();
+        $negatif = array();
         
+        $total = 0;
+
+        foreach($users as $user) {
+            $total += $user->getSpending();
+        }
+
+        $mediumAmount = $total / sizeof($users);
+
+        foreach($users as $user) {
+            if($user->getSpending() > $mediumAmount) {
+                $user->setSpending($user->getSpending()- $mediumAmount);
+                array_push($positif, $user);
+            }
+            elseif($user->getSpending() < $mediumAmount) {
+                $user->setSpending($user->getSpending()- $mediumAmount);
+                array_push($negatif, $user);
+            }
+        }
+
+        $results = array();
+
+        for ($i = 0; $i < sizeof($negatif); $i++){
+            for ($j = 0; $j < sizeof($positif); $j++){
+                if($positif[$j]->getSpending() == 0){
+                    $j++;
+                } elseif ( ($positif[$j]->getSpending() > $negatif[$i]->getSpending() && $negatif[$i]->getSpending() < 0) ) {
+                    $reste = $positif[$j]->getSpending() - ($negatif[$i]->getSpending() * -1);
+                    $paiement = $positif[$j]->getSpending() - $reste;
+                    $positif[$j]->setSpending($positif[$j]->getSpending() - $paiement);
+                    $negatif[$i]->setSpending($negatif[$i]->getSpending() + $paiement);
+                    array_push($results, ($negatif[$i]->getName() . " doit donner " . $paiement . " € à " . $positif[$j]->getName()));
+                } elseif ( ($positif[$j]->getSpending() < $negatif[$i]->getSpending() && $negatif[$i]->getSpending() < 0)) {
+                    $paiement = $positif[$j]->getSpending();
+                    $positif[$j]->setSpending($positif[$j]->getSpending() - $paiement);
+                    $negatif[$i]->setSpending($negatif[$i]->getSpending() + $paiement);
+                    array_push($results, ($negatif[$i]->getName() . " doit donner " . $paiement . " € à " . $positif[$j]->getName()));
+                } elseif ( ($positif[$j]->getSpending() == $negatif[$i]->getSpending() && $negatif[$i]->getSpending() < 0)) {
+                    $paiement = $positif[$j]->getSpending();
+                    $positif[$j]->setSpending(0);
+                    $negatif[$i]->setSpending(0);
+                    array_push($results, ($negatif[$i]->getName() . " doit donner " . $paiement . " € à " . $positif[$j]->getName()));
+                } else {
+                    $j++;
+                }
+            }
+        }
 
         return $this->render('main/recap.html.twig', [
             'controller_name' => 'MainController',
             'group' => $group,
+            'results' => $results,
             'users' => $users
         ]);
     }

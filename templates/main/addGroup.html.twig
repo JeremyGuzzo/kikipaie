@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}KiKiPaie{% endblock %}
+
+{% block body %}
+
+{{ form_start(form) }}
+
+    {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder':'Nom du budget'}})}}
+
+    {{ form_widget(form.create, {'attr': {'class': 'btn btn-primary'}})}}
+{{ form_end(form) }}
+
+
+{% endblock %}
