@@ -173,17 +173,17 @@ class MainController extends Controller
                     $paiement = $positif[$j]->getSpending() - $reste;
                     $positif[$j]->setSpending($positif[$j]->getSpending() - $paiement);
                     $negatif[$i]->setSpending($negatif[$i]->getSpending() + $paiement);
-                    array_push($results, ($negatif[$i]->getName() . " doit donner " . $paiement . " € à " . $positif[$j]->getName()));
+                    array_push($results, ($negatif[$i]->getName() . " doit donner " . round($paiement, 1) . " € à " . $positif[$j]->getName()));
                 } elseif ( ($positif[$j]->getSpending() < $negatif[$i]->getSpending() && $negatif[$i]->getSpending() < 0)) {
                     $paiement = $positif[$j]->getSpending();
                     $positif[$j]->setSpending($positif[$j]->getSpending() - $paiement);
                     $negatif[$i]->setSpending($negatif[$i]->getSpending() + $paiement);
-                    array_push($results, ($negatif[$i]->getName() . " doit donner " . $paiement . " € à " . $positif[$j]->getName()));
+                    array_push($results, ($negatif[$i]->getName() . " doit donner " . round($paiement, 1) . " € à " . $positif[$j]->getName()));
                 } elseif ( ($positif[$j]->getSpending() == $negatif[$i]->getSpending() && $negatif[$i]->getSpending() < 0)) {
                     $paiement = $positif[$j]->getSpending();
                     $positif[$j]->setSpending(0);
                     $negatif[$i]->setSpending(0);
-                    array_push($results, ($negatif[$i]->getName() . " doit donner " . $paiement . " € à " . $positif[$j]->getName()));
+                    array_push($results, ($negatif[$i]->getName() . " doit donner " . round($paiement, 1) . " € à " . $positif[$j]->getName()));
                 } else {
                     $j++;
                 }
