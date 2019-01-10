@@ -29,6 +29,37 @@ class MainController extends Controller
         ]);
     }
 
+
+        /**
+     * @Route("/addGroup", name="addGroup")
+     */
+    public function addGroup(Request $request)
+    {
+        //creer le formulaire d'ajout de groupe
+        $group = new Group();
+        $group->setName('');
+
+        $form = $this->createFormBuilder($group)
+            ->add('name', TextType::class)
+            ->add('create', SubmitType::class, array('label' => 'Crée'))
+            ->getForm();
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $group = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($group);
+            $entityManager->flush();
+            $id = $group->getId();
+            return $this->redirectToRoute('admin', array('id' => $id) );
+        }
+
+        
+        return $this->render('main/addGroup.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
     /**
      * @Route("/admin/{id}", name="admin")
      */
