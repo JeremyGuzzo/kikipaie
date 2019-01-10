@@ -1,3 +1,28 @@
-<h1>Nom du Groupe</h1>
-<p>Montant à égaliser : ..... €</p>
-<p>Nom1 doit ...€ à Nom2</p>
+{% extends 'base.html.twig' %}
+{% block title %}KiKiPaie{% endblock %}
+{% block body %}
+
+<div class="row d-flex align-items-center">
+    <div class="col-1">
+        <a href="{{path('home')}}" class="btn btn-primary">Retour</a>
+    </div>
+</div>
+<h1>{{ group.name }}</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Participants</th>
+            <th>Participation (en €)</th>
+            <th>Doit</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %} 
+            <tr>
+                <td>{{ user.name|upper}}</td>
+                <td>{{ user.spending}}</td>
+            </tr>     
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

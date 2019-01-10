@@ -18,7 +18,7 @@
         </a>
         <hr />
         {% if groups %}
-            <p>Vos groupes déja créés :</p>
+            <p>Budgets :</p>
             {%for group in groups %}
             <a href="{{path('admin', { 'id':group.id })}}">
                 <button class="btn btn-primary">{{group.name}}</button>
