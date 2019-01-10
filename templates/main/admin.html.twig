@@ -25,7 +25,10 @@
     <tbody>
         {% for user in group.users %}
             <tr>
-                <td>{{ user.name|upper}}</td>
+                <td>
+                    {{ user.name|upper}}
+                    <a href="{{path('delete', { 'id':user.id })}}" class="btn btn-outline-danger btn-sm">X</a>
+                </td>
                 <td>
                     <div class="form-group">
                         <input type="text" class="form-control" value="{{ user.spending}}" />
@@ -34,8 +37,8 @@
                 {% set balance = (user.spending - (total / group.users|length))|round %}
                 <td class="{% if balance > 0 %} text-success {% else %} text-danger {% endif %}">
                     {{ balance }}  €
-                </td>
-            </tr>
+                </td>         
+            </tr>     
         {% endfor %}
         {{ form_start(form) }}
             {{ form_errors(form) }}

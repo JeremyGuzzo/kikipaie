@@ -108,28 +108,27 @@ class MainController extends Controller
 
 }
 
+
+
     /**
-     * @Route("/delete/{id}", name="delete")
-     */
-
-    public function deleteGroup($id){
-
-      $delete = $this->getDoctrine()->getManager();
-
-      $group = $delete->getRepository(Group::class)->find($id);
-
-      if (!$group) {
-          return $this->redirectToRoute('home');
-      }
-
-      $delete->remove($group);
-      $delete->flush();
-
-      return $this->redirectToRoute('home');
+    * @Route("/delete/{id}", name="delete")
+    */
+    public function deleteUser($id, Request $request) {
+        $delete = $this->getDoctrine()->getManager();
+        $user = $delete->getRepository(User::class)->find($id);
+        
+        $currentGroup = $user->getGroupUsed();
+        $currentGroupId= $currentGroup->getId();
+        
+        $delete->remove($user);
+        $delete->flush();
+        
+        
+        return $this->redirectToRoute('admin', array('id' => $currentGroupId));
     }
 
     /**
-     * @Route("/recap{id}", name="recap")
+     * @Route("/recap/{id}", name="recap")
      */
     public function recap($id)
     {
